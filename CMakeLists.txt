@@ -1,0 +1,37 @@
+cmake_minimum_required(VERSION 3.10)
+set(CMAKE_CXX_STANDARD 11)
+
+get_filename_component(PROJECT ${CMAKE_SOURCE_DIR} NAME)
+project(${PROJECT})
+
+find_package(OpenCV REQUIRED )
+find_package(Eigen3 REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system thread graph chrono)
+
+set(EXTERNAL_INCLUDE_DIRS ${OpenCV_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIRS})
+set(EXTERNAL_LIBS ${OpenCV_LIBS} ${EIGEN3_LIBS} ${Boost_LIBRARIES}) # tempoparily not neccessary
+
+add_executable(testcv test_lib/testcv.cpp)
+add_executable(testeigen test_lib/testeigen.cpp)
+add_executable(testboost test_lib/testboost.cpp)
+add_executable(test_intersection test_lib/test_obstacle_algorithm/test_intersection.cpp)
+add_executable(testobstacle obstacle/testobstacle.cpp obstacle/obstacle.cpp common/ultis.cpp)
+
+
+include_directories(
+    ${EXTERNAL_INCLUDE_DIRS}
+    include
+    include/obstacle
+    include/common 
+)
+
+target_link_libraries(testcv ${OpenCV_LIBS} ${EIGEN3_LIBS})
+target_link_libraries(testeigen ${EIGEN3_LIBS})
+target_link_libraries(testboost ${Boost_LIBRARIES})
+target_link_libraries(test_intersection ${EIGEN3_LIBS})
+target_link_libraries(testobstacle ${EXTERNAL_LIBS})
+
+
+
+
+
