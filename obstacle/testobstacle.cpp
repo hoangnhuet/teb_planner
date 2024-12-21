@@ -3,6 +3,7 @@
 int main()
 {
     using namespace teb_local_planner;
+    int k = 0;
 
     // Create a PolygonObstacle with some vertices
     Point2dContainer vertices;
