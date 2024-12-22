@@ -66,5 +66,6 @@ int main()
     // cv::line(map, cv::Point(300,300), cv::Point(400,400), color, 2);
     cv::imshow("Vis Test", map);
     cv::waitKey(0);
+
     return 0;
 }
